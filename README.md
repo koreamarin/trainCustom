@@ -185,3 +185,11 @@ pkg upgrade && pkg upgrade
 pkg install python
 pkg install git
 pkg install clang python-dev libcurl-dev
+pkg build-essential
+pkg python-cryptography
+
+git clone <github reposiroty 주소>
+
+(srtgo 프로젝트 폴더에서..)
+pip install .
+python srtgo.srtgoandroid
