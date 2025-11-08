@@ -1,4 +1,5 @@
 # SRTgo: K-Train (KTX, SRT) Reservation Assistant
+
 [![Upload Python Package](https://github.com/lapis42/srtgo/actions/workflows/python-publish.yml/badge.svg)](https://github.com/lapis42/srtgo/actions/workflows/python-publish.yml)
 [![Downloads](https://static.pepy.tech/badge/srtgo)](https://pepy.tech/project/srtgo)
 [![Downloads](https://static.pepy.tech/badge/srtgo/month)](https://pepy.tech/project/srtgo)
@@ -11,6 +12,7 @@
 > 본 프로그램에 입력하는 아이디, 비번, 카드번호, 예매 설정 등은 로컬 컴퓨터에 [keyring 모듈](https://pypi.org/project/keyring/)을 통하여 저장하며 그 이외의 위치에 네트워크 전송 등을 통하여 공유되지 않습니다.
 
 ## 주요 기능
+
 - SRT 및 KTX 기차표 자동 예매
 - 텔레그램 알림 전송
   - [Bot Token 및 Chat ID 얻기](https://gabrielkim.tistory.com/entry/Telegram-Bot-Token-%EB%B0%8F-Chat-Id-%EC%96%BB%EA%B8%B0)
@@ -20,6 +22,7 @@
 - 매진 시 예약대기 신청
 
 ---
+
 > [!WARNING]
 > All commercial and profit-making use of this program is strictly prohibited. Use of this program is at your own risk, and the developers of this program shall not be liable for any liability, including civil or criminal liability. By downloading this program, all users are deemed to agree to the above terms without any objection.
 
@@ -27,19 +30,22 @@
 > All sensitive data (login, payment info, settings) is stored locally via [keyring](https://pypi.org/project/keyring/) and never transmitted.
 
 ## Key Features
+
 - Automated SRT/KTX ticket reservations
 - Telegram notifications
 - Automatic credit card payment
-- Favorite station presets  
+- Favorite station presets
 - Child/Senior ticket support
 - Waitlist for sold-out trains
 
 ## Installation / Update
+
 ```bash
 pip install srtgo -U
 ```
 
 - Install beta version (can be unstable)
+
 ```bash
 pip install git+https://github.com/lapis42/srtgo -U
 ```
@@ -119,7 +125,7 @@ pip install git+https://github.com/lapis42/srtgo -U
    8
    9
 
-[?] 예약할 열차 선택 (↕:이동, Space: 선택, Enter: 완료, Ctrl-C: 취소): 
+[?] 예약할 열차 선택 (↕:이동, Space: 선택, Enter: 완료, Ctrl-C: 취소):
    [ ] [SRT 323] 01월 04일, 수서~동대구(10:00~11:40) 특실 매진, 일반실 매진, 예약대기 불가능
    [ ] [SRT 325] 01월 04일, 수서~동대구(10:30~12:17) 특실 매진, 일반실 매진, 예약대기 불가능
    [ ] [SRT 327] 01월 04일, 수서~동대구(10:50~12:30) 특실 매진, 일반실 매진, 예약대기 불가능
@@ -168,4 +174,14 @@ pip install git+https://github.com/lapis42/srtgo -U
 ```
 
 ## Acknowledgments
+
 - This project includes code from [SRT](https://github.com/ryanking13/SRT) by ryanking13, licensed under the MIT License, and [korail2](https://github.com/carpedm20/korail2) by carpedm20, licensed under the BSD License.
+
+# 안드로이드 버전
+
+Termux 앱 위에서 동작.
+
+pkg upgrade && pkg upgrade
+pkg install python
+pkg install git
+pkg install clang python-dev libcurl-dev
