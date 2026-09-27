@@ -188,8 +188,16 @@ pkg install clang python-dev libcurl-dev
 pkg build-essential
 pkg python-cryptography
 
-git clone <github reposiroty 주소>
+git clone https://github.com/koreamarin/trainCustom.git
 
 (srtgo 프로젝트 폴더에서..)
+cd trainCustom
 pip install .
-python srtgo.srtgoandroid
+cd srtgo
+python srtgoandroid.py
+
+# 윈도우 버전
+
+pyinstaller로 파일 하나로 말기
+
+pyinstaller --onefile --paths="." --collect-all ktx --collect-all srt --collect-all inquirer --collect-all readchar srtgowindow.py
