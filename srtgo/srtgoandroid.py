@@ -18,7 +18,7 @@ import telegram
 import time
 import re
 
-CREDENTIALS_FILE = "..\\credentials.json"
+CREDENTIALS_FILE = "credentials.json"
 
 def _read_credentials():
     if not os.path.exists(CREDENTIALS_FILE):
@@ -53,7 +53,7 @@ def delete_password(service, username):
         del creds[service][username]
         _write_credentials(creds)
 
-from ktx import (
+from .ktx import (
     Korail,
     KorailError,
     NetFunnelError,
@@ -66,7 +66,7 @@ from ktx import (
     Disability4To6Passenger,
 )
 
-from srt import (
+from .srt import (
     SRT,
     SRTError,
     SRTNetFunnelError,
