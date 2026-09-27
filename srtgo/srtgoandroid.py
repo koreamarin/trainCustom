@@ -18,7 +18,7 @@ import telegram
 import time
 import re
 
-CREDENTIALS_FILE = "credentials.json"
+CREDENTIALS_FILE = "..\\credentials.json"
 
 def _read_credentials():
     if not os.path.exists(CREDENTIALS_FILE):
@@ -53,9 +53,10 @@ def delete_password(service, username):
         del creds[service][username]
         _write_credentials(creds)
 
-from .ktx import (
+from ktx import (
     Korail,
     KorailError,
+    NetFunnelError,
     ReserveOption,
     TrainType,
     AdultPassenger,
@@ -65,7 +66,7 @@ from .ktx import (
     Disability4To6Passenger,
 )
 
-from .srt import (
+from srt import (
     SRT,
     SRTError,
     SRTNetFunnelError,
@@ -153,10 +154,10 @@ DEFAULT_STATIONS = {
     "KTX": ["서울", "대전", "동대구", "부산"],
 }
 
-# 예약 간격 (평균 간격 (초) = SHAPE * SCALE): gamma distribution (1.25 +/- 0.25 s)
-RESERVE_INTERVAL_SHAPE = 4
-RESERVE_INTERVAL_SCALE = 0.25
-RESERVE_INTERVAL_MIN = 0.25
+# 예약 간격 (평균 간격 (초) = SHAPE * SCALE + MIN): gamma distribution (~3.8 s)
+RESERVE_INTERVAL_SHAPE = 5
+RESERVE_INTERVAL_SCALE = 0.6
+RESERVE_INTERVAL_MIN = 0.8
 
 WAITING_BAR = ["|", "/", "-", "\\"]
 
@@ -202,6 +203,8 @@ def srtgo(debug=False):
         )
 
         if choice == -1:
+            from importlib.metadata import version
+            print(f"\n{version('srtgo')} made by dion")
             break
 
         if choice in {1, 2, 3, 6, 7}:
@@ -785,7 +788,14 @@ def reserve(rail_type="SRT", debug=False):
 
         except KorailError as ex:
             msg = ex.msg
-            if "Need to Login" in msg:
+            code = ex.code or ""
+            if "MACRO" in code or "MACRO" in msg:
+                if debug:
+                    print(
+                        f"\nException: {ex}\nType: {type(ex)}\nArgs: {ex.args}\nMessage: {msg}"
+                    )
+                rail.clear()
+            elif "Need to Login" in msg:
                 rail = login(rail_type, debug=debug)
                 if not rail.is_login and not _handle_error(ex):
                     return
@@ -795,6 +805,14 @@ def reserve(rail_type="SRT", debug=False):
             ):
                 if not _handle_error(ex):
                     return
+            _sleep()
+
+        except NetFunnelError as ex:
+            if debug:
+                print(
+                    f"\nException: {ex}\nType: {type(ex)}\nArgs: {ex.args}"
+                )
+            rail.clear()
             _sleep()
 
         except JSONDecodeError as ex:
