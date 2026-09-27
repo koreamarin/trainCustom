@@ -200,4 +200,6 @@ python srtgoandroid.py
 
 pyinstaller로 파일 하나로 말기
 
+srtgo 폴더로 들어가서
+
 pyinstaller --onefile --paths="." --collect-all ktx --collect-all srt --collect-all inquirer --collect-all readchar srtgowindow.py
