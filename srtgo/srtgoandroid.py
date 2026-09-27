@@ -53,7 +53,7 @@ def delete_password(service, username):
         del creds[service][username]
         _write_credentials(creds)
 
-from .ktx import (
+from ktx import (
     Korail,
     KorailError,
     NetFunnelError,
@@ -66,7 +66,7 @@ from .ktx import (
     Disability4To6Passenger,
 )
 
-from .srt import (
+from srt import (
     SRT,
     SRTError,
     SRTNetFunnelError,
